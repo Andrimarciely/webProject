@@ -24,7 +24,23 @@ class Amostra(models.Model):
     conclusao=models.CharField(max_length=200, help_text='')
     observacao=models.CharField(max_length=200, help_text='')
     irregularidades=models.CharField(max_length=200, help_text='')
-    parametro = models.ForeignKey(Parametro, on_delete=models.CASCADE)
+    parametro=models.ForeignKey(Parametro, on_delete=models.CASCADE)
 
 
+    def __str__(self):
+        return self.codigo_interno
+class Formulario_de_Amostra(models.Model):
+    id_solicitacao_de_serviço=models.CharField(max_length=200, help_text='')
+    tipo_de_amostra=models.CharField(max_length=200, help_text='')
+    data_de_coleta=models.DateField()
+    amostra=models.ForeignKey(Parametro, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.tipo_de_amostra
+
+class Solicitacao_de_Serviço(models.Model):
+
+    nome_cliente=models.CharField(max_length=200, help_text='')
+    empresa_avaliada=models.CharField(max_length=200, help_text='')
+    lugar_de_coleta=models.CharField(max_length=200, help_text='')
+    formulario_de_amostra = models.ForeignKey(Parametro, on_delete=models.CASCADE)
