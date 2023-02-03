@@ -38,9 +38,20 @@ class Formulario_de_Amostra(models.Model):
     def __str__(self):
         return self.tipo_de_amostra
 
-class Solicitacao_de_Serviço(models.Model):
-
+class Solicitacao_de_Servico(models.Model):
     nome_cliente=models.CharField(max_length=200, help_text='')
     empresa_avaliada=models.CharField(max_length=200, help_text='')
     lugar_de_coleta=models.CharField(max_length=200, help_text='')
     formulario_de_amostra = models.ForeignKey(Parametro, on_delete=models.CASCADE)
+
+
+class Lista_de_Servico(models.Model):
+    descricao=models.CharField(max_length=200, help_text='')
+    class Matriz(models.TextChoices):
+        AGUA='A'
+        EMISSÃO='E'
+        HIGIENE='HO'
+        SOLO='S'
+
+        matriz=models.CharField(max_length=2,choices=Matriz.choices,default=AGUA)
+
